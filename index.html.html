@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recursos Materiales — HIVICO Seguridad</title>
+<style>
+  :root {
+    --azul: #1E3A5F;
+    --azul-med: #2563EB;
+    --azul-clar: #DBEAFE;
+    --verde: #15803D;
+    --verde-bg: #DCFCE7;
+    --rojo: #DC2626;
+    --rojo-bg: #FEE2E2;
+    --amarillo: #D97706;
+    --amarillo-bg: #FEF3C7;
+    --gris-bg: #F8FAFC;
+    --gris-borde: #E2E8F0;
+    --texto: #1E293B;
+    --texto-sec: #64748B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--gris-bg); color: var(--texto); min-height: 100vh; }
+
+  /* ── LOGIN ── */
+  #pantalla-login {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background: linear-gradient(135deg, #1E3A5F 0%, #2563EB 100%);
+  }
+  .login-card {
+    background: #fff; border-radius: 16px; padding: 40px 48px;
+    text-align: center; width: 360px; box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+  .logo-circle {
+    width: 64px; height: 64px; background: var(--azul); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 22px; font-weight: 700; color: #fff;
+  }
+  .login-card h2 { font-size: 20px; color: var(--azul); margin-bottom: 4px; }
+  .login-card p { font-size: 12px; color: var(--texto-sec); margin-bottom: 28px; }
+  .login-card input {
+    width: 100%; padding: 14px; border: 2px solid var(--gris-borde);
+    border-radius: 8px; font-size: 18px; text-align: center; letter-spacing: 6px;
+    font-weight: 600; outline: none; transition: border .2s;
+  }
+  .login-card input:focus { border-color: var(--azul-med); }
+  .btn-login {
+    width: 100%; margin-top: 16px; padding: 14px;
+    background: var(--azul); color: #fff; border: none; border-radius: 8px;
+    font-size: 15px; font-weight: 600; cursor: pointer; transition: background .2s;
+  }
+  .btn-login:hover { background: var(--azul-med); }
+  .login-error { color: var(--rojo); font-size: 13px; margin-top: 10px; display: none; }
+
+  /* ── APP SHELL ── */
+  #app { display: none; min-height: 100vh; flex-direction: column; }
+
+  /* Header */
+  .header {
+    background: var(--azul); color: #fff; padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between; height: 56px;
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.2);
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .header-logo { font-size: 18px; font-weight: 700; }
+  .header-sub { font-size: 11px; opacity: .7; }
+  .header-user { font-size: 12px; opacity: .85; }
+  .btn-salir {
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+    color: #fff; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 12px;
+    transition: background .2s;
+  }
+  .btn-salir:hover { background: rgba(255,255,255,.25); }
+
+  /* Módulos nav */
+  .modulos-nav {
+    background: #fff; border-bottom: 1px solid var(--gris-borde);
+    display: flex; gap: 0; overflow-x: auto; padding: 0 16px;
+  }
+  .modulo-tab {
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+    padding: 12px 24px; cursor: pointer; border-bottom: 3px solid transparent;
+    transition: all .2s; color: var(--texto-sec); white-space: nowrap; font-size: 13px;
+    user-select: none;
+  }
+  .modulo-tab .tab-icon { font-size: 20px; }
+  .modulo-tab:hover { background: var(--gris-bg); color: var(--azul); }
+  .modulo-tab.activo { border-bottom-color: var(--azul-med); color: var(--azul); font-weight: 600; }
+
+  /* Contenido principal */
+  .contenido { padding: 24px; max-width: 1100px; margin: 0 auto; width: 100%; }
+
+  /* Sección header */
+  .seccion-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .seccion-header h2 { font-size: 20px; color: var(--azul); }
+  .seccion-header p { font-size: 13px; color: var(--texto-sec); margin-top: 2px; }
+
+  /* Cards KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 16px; margin-bottom: 28px; }
+  .kpi-card {
+    background: #fff; border-radius: 10px; padding: 16px 20px;
+    border: 1px solid var(--gris-borde); box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  }
+  .kpi-card .kpi-val { font-size: 32px; font-weight: 700; line-height: 1; }
+  .kpi-card .kpi-lbl { font-size: 12px; color: var(--texto-sec); margin-top: 4px; }
+  .kpi-rojo .kpi-val { color: var(--rojo); }
+  .kpi-verde .kpi-val { color: var(--verde); }
+  .kpi-azul .kpi-val { color: var(--azul-med); }
+  .kpi-amarillo .kpi-val { color: var(--amarillo); }
+
+  /* Formulario */
+  .form-card {
+    background: #fff; border-radius: 12px; padding: 28px 32px;
+    border: 1px solid var(--gris-borde); box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    margin-bottom: 20px;
+  }
+  .form-card h3 {
+    font-size: 15px; color: var(--azul); margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--gris-borde);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 12px; font-weight: 600; color: var(--texto-sec); text-transform: uppercase; letter-spacing: .04em; }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 10px 12px; border: 1.5px solid var(--gris-borde); border-radius: 8px;
+    font-size: 14px; outline: none; transition: border .2s; background: #fff;
+    font-family: inherit;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--azul-med); box-shadow: 0 0 0 3px rgba(37,99,235,.08);
+  }
+  .form-group textarea { resize: vertical; min-height: 80px; }
+  .form-group input[readonly] { background: var(--gris-bg); color: var(--texto-sec); }
+
+  /* Tabla artículos */
+  .tabla-articulos { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .tabla-articulos th {
+    background: var(--azul); color: #fff; padding: 10px 12px;
+    font-size: 12px; font-weight: 600; text-align: left;
+  }
+  .tabla-articulos td { padding: 8px 12px; border-bottom: 1px solid var(--gris-borde); font-size: 13px; vertical-align: middle; }
+  .tabla-articulos tr:nth-child(even) td { background: var(--gris-bg); }
+  .tabla-articulos tr:hover td { background: var(--azul-clar); }
+  .tabla-articulos input, .tabla-articulos select {
+    padding: 6px 8px; border: 1px solid var(--gris-borde); border-radius: 6px;
+    font-size: 13px; width: 100%; background: #fff;
+  }
+  .btn-add-fila {
+    margin-top: 10px; padding: 8px 16px; background: var(--gris-bg);
+    border: 1.5px dashed var(--gris-borde); border-radius: 8px; cursor: pointer;
+    font-size: 13px; color: var(--texto-sec); transition: all .2s; width: 100%;
+  }
+  .btn-add-fila:hover { border-color: var(--azul-med); color: var(--azul-med); background: var(--azul-clar); }
+
+  /* Botones acción */
+  .form-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px; }
+  .btn-primary {
+    padding: 12px 28px; background: var(--azul); color: #fff; border: none;
+    border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background .2s;
+  }
+  .btn-primary:hover { background: var(--azul-med); }
+  .btn-secondary {
+    padding: 12px 28px; background: #fff; color: var(--texto); border: 1.5px solid var(--gris-borde);
+    border-radius: 8px; font-size: 14px; cursor: pointer; transition: all .2s;
+  }
+  .btn-secondary:hover { border-color: var(--azul); color: var(--azul); }
+
+  /* Tabla de registros */
+  .tabla-registros { width: 100%; border-collapse: collapse; }
+  .tabla-registros th {
+    background: #1E3A5F; color: #fff; padding: 11px 14px;
+    font-size: 12px; font-weight: 600; text-align: left; white-space: nowrap;
+  }
+  .tabla-registros td {
+    padding: 10px 14px; border-bottom: 1px solid var(--gris-borde);
+    font-size: 13px; vertical-align: middle;
+  }
+  .tabla-registros tr:hover td { background: #F0F7FF; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 99px;
+    font-size: 11px; font-weight: 600;
+  }
+  .badge-verde { background: var(--verde-bg); color: var(--verde); }
+  .badge-rojo { background: var(--rojo-bg); color: var(--rojo); }
+  .badge-amarillo { background: var(--amarillo-bg); color: var(--amarillo); }
+  .badge-azul { background: var(--azul-clar); color: var(--azul); }
+  .badge-gris { background: #F1F5F9; color: #64748B; }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+    background: var(--azul); color: #fff; padding: 14px 22px;
+    border-radius: 10px; font-size: 14px; font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2); display: none;
+    animation: slideUp .3s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  /* Modal */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.5);
+    z-index: 500; display: none; align-items: center; justify-content: center;
+  }
+  .modal-overlay.visible { display: flex; }
+  .modal {
+    background: #fff; border-radius: 14px; padding: 32px; max-width: 700px;
+    width: 95%; max-height: 85vh; overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0,0,0,.25);
+  }
+  .modal h3 { font-size: 18px; color: var(--azul); margin-bottom: 20px; }
+  .modal-folio {
+    background: var(--azul); color: #fff; padding: 16px 24px;
+    border-radius: 10px; text-align: center; margin-bottom: 20px;
+  }
+  .modal-folio .folio-num { font-size: 28px; font-weight: 700; letter-spacing: 2px; }
+  .modal-folio p { font-size: 12px; opacity: .8; margin-top: 4px; }
+  .detalle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  .detalle-item label { font-size: 11px; font-weight: 600; color: var(--texto-sec); text-transform: uppercase; }
+  .detalle-item span { font-size: 14px; display: block; margin-top: 2px; }
+
+  /* Buscador */
+  .buscador-row { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; }
+  .buscador-row input {
+    flex: 1; padding: 10px 14px; border: 1.5px solid var(--gris-borde);
+    border-radius: 8px; font-size: 14px; outline: none;
+  }
+  .buscador-row input:focus { border-color: var(--azul-med); }
+  .buscador-row select { padding: 10px 12px; border: 1.5px solid var(--gris-borde); border-radius: 8px; font-size: 14px; }
+
+  /* Tabla wrapper scroll */
+  .tabla-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--gris-borde); }
+
+  /* Resguardo print */
+  @media print {
+    body * { visibility: hidden; }
+    #zona-impresion, #zona-impresion * { visibility: visible; }
+    #zona-impresion { position: fixed; top: 0; left: 0; width: 100%; }
+  }
+
+  .hidden { display: none !important; }
+
+  /* Estado vacío */
+  .estado-vacio {
+    text-align: center; padding: 60px 20px; color: var(--texto-sec);
+  }
+  .estado-vacio .icono { font-size: 48px; margin-bottom: 12px; }
+  .estado-vacio p { font-size: 14px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ LOGIN ═══════════════════════════════════════ -->
+<div id="pantalla-login">
+  <div class="login-card">
+    <div class="logo-circle">HV</div>
+    <h2>Sistema de Recursos Materiales</h2>
+    <p>HIVICO · FIREWALL · SELIPRO · SAUBERMEX<br>Ingresa tu código de coordinación + PIN</p>
+    <input type="text" id="input-pin" placeholder="Ej: CDMX2024" maxlength="12"
+           onkeydown="if(event.key==='Enter') intentarLogin()">
+    <button class="btn-login" onclick="intentarLogin()">→ ENTRAR AL SISTEMA</button>
+    <div class="login-error" id="login-error">Código incorrecto. Intenta de nuevo.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ APP ═══════════════════════════════════════ -->
+<div id="app">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div style="width:36px;height:36px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;">HV</div>
+      <div>
+        <div class="header-logo">Recursos Materiales</div>
+        <div class="header-sub">HIVICO Seguridad Privada</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div class="header-user" id="header-usuario"></div>
+      <button class="btn-salir" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <!-- Módulos nav -->
+  <div class="modulos-nav">
+    <div class="modulo-tab activo" onclick="mostrarModulo('solicitud', this)">
+      <span class="tab-icon">📋</span>
+      <span>Nueva Solicitud</span>
+    </div>
+    <div class="modulo-tab" onclick="mostrarModulo('mis-solicitudes', this)">
+      <span class="tab-icon">📁</span>
+      <span>Mis Solicitudes</span>
+    </div>
+    <div class="modulo-tab" onclick="mostrarModulo('resguardo', this)" id="tab-resguardo">
+      <span class="tab-icon">📄</span>
+      <span>Resguardo</span>
+    </div>
+    <div class="modulo-tab" onclick="mostrarModulo('inventario', this)" id="tab-inventario">
+      <span class="tab-icon">📦</span>
+      <span>Inventario</span>
+    </div>
+    <div class="modulo-tab" onclick="mostrarModulo('dashboard', this)" id="tab-dashboard">
+      <span class="tab-icon">📊</span>
+      <span>Dashboard</span>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="contenido">
+
+    <!-- ── MÓDULO: NUEVA SOLICITUD ── -->
+    <div id="mod-solicitud">
+      <div class="seccion-header">
+        <div>
+          <h2>📋 Nueva Solicitud de Recursos</h2>
+          <p>Complete todos los campos. Recibirá un folio de seguimiento al enviar.</p>
+        </div>
+      </div>
+
+      <!-- Datos generales -->
+      <div class="form-card">
+        <h3>📌 Datos de la Solicitud</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Folio (automático)</label>
+            <input type="text" id="folio-preview" readonly placeholder="Se asigna al guardar">
+          </div>
+          <div class="form-group">
+            <label>Fecha de solicitud</label>
+            <input type="text" id="fecha-sol" readonly>
+          </div>
+          <div class="form-group">
+            <label>Nombre del solicitante *</label>
+            <input type="text" id="sol-nombre" placeholder="Nombre completo">
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" id="sol-correo" placeholder="correo@ejemplo.com">
+          </div>
+          <div class="form-group">
+            <label>Coordinación / Estado *</label>
+            <select id="sol-coord">
+              <option value="">— Selecciona —</option>
+              <option>AGUASCALIENTES</option><option>BAJA CALIFORNIA</option>
+              <option>BAJA CALIFORNIA SUR</option><option>CAMPECHE</option>
+              <option>CHIAPAS</option><option>CHIHUAHUA</option>
+              <option>CIUDAD DE MÉXICO</option><option>COAHUILA</option>
+              <option>COLIMA</option><option>DURANGO</option>
+              <option>ESTADO DE MÉXICO</option><option>GUANAJUATO</option>
+              <option>GUERRERO</option><option>HIDALGO</option>
+              <option>JALISCO</option><option>MICHOACÁN</option>
+              <option>MORELOS</option><option>NAYARIT</option>
+              <option>NUEVO LEÓN</option><option>OAXACA</option>
+              <option>PUEBLA</option><option>QUERÉTARO</option>
+              <option>QUINTANA ROO</option><option>SAN LUIS POTOSÍ</option>
+              <option>SINALOA</option><option>SONORA</option>
+              <option>TABASCO</option><option>TAMAULIPAS</option>
+              <option>TLAXCALA</option><option>VERACRUZ</option>
+              <option>YUCATÁN</option><option>ZACATECAS</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Servicio / Cliente *</label>
+            <select id="sol-servicio">
+              <option value="">— Selecciona —</option>
+              <option>BIENESTAR</option><option>CARDIOLOGIA</option>
+              <option>CFE GENERACION</option><option>CFE TRANSMISION</option>
+              <option>CIESAS</option><option>CITY EXPRESS</option>
+              <option>CONAFOR</option><option>FARMACIA DEL AHORRO</option>
+              <option>FISCALIA</option><option>GERIATRIA</option>
+              <option>GRUPO HORACIO</option><option>HEINEKEN</option>
+              <option>IMSS</option><option>INEEL</option>
+              <option>INEGI</option><option>IPN</option>
+              <option>ISSSTE</option><option>LICONSA</option>
+              <option>PLANTAS ADMINISTRATIVAS</option>
+              <option>UANL</option><option>UNITEC</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Empresa *</label>
+            <select id="sol-empresa">
+              <option value="">— Selecciona —</option>
+              <option>HIVICO</option><option>FIREWALL</option>
+              <option>SELIPRO</option><option>SAUBERMEX</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Justificación / Motivo *</label>
+            <textarea id="sol-justificacion" placeholder="Describe el motivo operativo de la solicitud..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artículos -->
+      <div class="form-card">
+        <h3>📦 Artículos Solicitados</h3>
+        <div class="tabla-wrap">
+          <table class="tabla-articulos">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th style="min-width:280px">Artículo</th>
+                <th style="min-width:100px">Talla</th>
+                <th style="min-width:80px">Cantidad</th>
+                <th style="min-width:200px">Observación</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tbody-articulos">
+            </tbody>
+          </table>
+        </div>
+        <button class="btn-add-fila" onclick="agregarFila()">+ Agregar artículo</button>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+        <button class="btn-primary" onclick="enviarSolicitud()">📤 Enviar Solicitud</button>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO: MIS SOLICITUDES ── -->
+    <div id="mod-mis-solicitudes" class="hidden">
+      <div class="seccion-header">
+        <div>
+          <h2>📁 Mis Solicitudes</h2>
+          <p>Historial y estado de todas las solicitudes enviadas.</p>
+        </div>
+      </div>
+      <div class="buscador-row">
+        <input type="text" id="buscar-sol" placeholder="🔍 Buscar por folio, artículo o coordinación..." oninput="filtrarSolicitudes()">
+        <select id="filtro-estado" onchange="filtrarSolicitudes()">
+          <option value="">Todos los estados</option>
+          <option value="En revisión">En revisión</option>
+          <option value="En proceso">En proceso</option>
+          <option value="Entregada">Entregada</option>
+          <option value="Rechazada">Rechazada</option>
+        </select>
+      </div>
+      <div class="tabla-wrap">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Folio</th><th>Fecha</th><th>Coordinación</th>
+              <th>Servicio</th><th>Artículos</th><th>Estado</th><th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-solicitudes"></tbody>
+        </table>
+      </div>
+      <div id="vacio-solicitudes" class="estado-vacio hidden">
+        <div class="icono">📭</div>
+        <p>No hay solicitudes registradas aún.</p>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO: RESGUARDO ── -->
+    <div id="mod-resguardo" class="hidden">
+      <div class="seccion-header">
+        <div>
+          <h2>📄 Resguardo de Equipo</h2>
+          <p>Registro de entrega de equipo por elemento de seguridad. Genera documento imprimible.</p>
+        </div>
+        <button class="btn-primary" onclick="mostrarFormResguardo()">+ Nuevo Resguardo</button>
+      </div>
+
+      <div id="form-resguardo" class="hidden">
+        <div class="form-card">
+          <h3>👤 Datos del Elemento de Seguridad</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>No. Empleado *</label>
+              <input type="text" id="rsg-noEmp" placeholder="Ej: EMP-0042">
+            </div>
+            <div class="form-group">
+              <label>Nombre completo *</label>
+              <input type="text" id="rsg-nombre" placeholder="Apellido Paterno Materno Nombre">
+            </div>
+            <div class="form-group">
+              <label>Coordinación</label>
+              <select id="rsg-coord">
+                <option value="">— Selecciona —</option>
+                <option>AGUASCALIENTES</option><option>BAJA CALIFORNIA</option>
+                <option>CIUDAD DE MÉXICO</option><option>JALISCO</option>
+                <option>NUEVO LEÓN</option><option>OAXACA</option>
+                <option>VERACRUZ</option><option>OTRO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Servicio / Cliente</label>
+              <select id="rsg-servicio">
+                <option value="">— Selecciona —</option>
+                <option>IMSS</option><option>INEGI</option><option>HEINEKEN</option>
+                <option>CFE GENERACION</option><option>OTRO</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Empresa</label>
+              <select id="rsg-empresa">
+                <option>HIVICO</option><option>FIREWALL</option>
+                <option>SELIPRO</option><option>SAUBERMEX</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Puesto</label>
+              <input type="text" id="rsg-puesto" placeholder="Ej: Guardia de Seguridad">
+            </div>
+            <div class="form-group">
+              <label>Folio Solicitud Origen</label>
+              <input type="text" id="rsg-folioSol" placeholder="Ej: SOL-2026-0001">
+            </div>
+            <div class="form-group">
+              <label>Fecha de entrega</label>
+              <input type="date" id="rsg-fecha">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <h3>📦 Equipo Entregado</h3>
+          <div class="tabla-wrap">
+            <table class="tabla-articulos">
+              <thead>
+                <tr>
+                  <th>#</th><th style="min-width:250px">Artículo</th>
+                  <th style="min-width:90px">Talla</th>
+                  <th style="min-width:80px">Cantidad</th>
+                  <th style="min-width:120px">Condición</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="tbody-rsg"></tbody>
+            </table>
+          </div>
+          <button class="btn-add-fila" onclick="agregarFilaRsg()">+ Agregar artículo</button>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-secondary" onclick="document.getElementById('form-resguardo').classList.add('hidden')">Cancelar</button>
+          <button class="btn-secondary" onclick="imprimirResguardo()">🖨️ Imprimir Resguardo</button>
+          <button class="btn-primary" onclick="guardarResguardo()">💾 Guardar Resguardo</button>
+        </div>
+      </div>
+
+      <div class="tabla-wrap" style="margin-top:16px">
+        <table class="tabla-registros">
+          <thead>
+            <tr>
+              <th>Folio</th><th>Fecha</th><th>No. Empleado</th>
+              <th>Elemento</th><th>Coordinación</th><th>Artículos</th><th>Acción</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-resguardos"></tbody>
+        </table>
+      </div>
+      <div id="vacio-resguardos" class="estado-vacio">
+        <div class="icono">📄</div>
+        <p>No hay resguardos registrados. Crea el primero.</p>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO: INVENTARIO ── -->
+    <div id="mod-inventario" class="hidden">
+      <div class="seccion-header">
+        <div>
+          <h2>📦 Inventario de Artículos</h2>
+          <p>Stock actual por artículo del catálogo oficial.</p>
+        </div>
+      </div>
+      <div class="buscador-row">
+        <input type="text" id="buscar-inv" placeholder="🔍 Buscar artículo..." oninput="filtrarInventario()">
+        <select id="filtro-cat" onchange="filtrarInventario()">
+          <option value="">Todas las categorías</option>
+          <option>Equipo Operativo</option><option>Electrónica/CCTV</option>
+          <option>Cómputo</option><option>Vehículos</option>
+          <option>Mobiliario</option><option>Papelería</option>
+        </select>
+      </div>
+      <div class="tabla-wrap">
+        <table class="tabla-registros" id="tabla-inventario">
+          <thead>
+            <tr>
+              <th>Código</th><th>Artículo</th><th>Categoría</th>
+              <th>Entradas</th><th>Salidas</th><th>Existencia</th>
+              <th>Stock Mín.</th><th>Alerta</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-inventario"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO: DASHBOARD ── -->
+    <div id="mod-dashboard" class="hidden">
+      <div class="seccion-header">
+        <div>
+          <h2>📊 Dashboard Ejecutivo</h2>
+          <p>Resumen general del sistema en tiempo real.</p>
+        </div>
+      </div>
+      <div class="kpi-grid" id="kpi-dashboard"></div>
+      <div class="form-card">
+        <h3>🔴 Solicitudes Pendientes de Atención</h3>
+        <div class="tabla-wrap">
+          <table class="tabla-registros">
+            <thead>
+              <tr><th>Folio</th><th>Fecha</th><th>Coordinación</th><th>Artículos</th><th>Estado</th></tr>
+            </thead>
+            <tbody id="tbody-dashboard"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /contenido -->
+</div><!-- /app -->
+
+<!-- Modal detalle -->
+<div class="modal-overlay" id="modal-detalle">
+  <div class="modal">
+    <div id="modal-contenido"></div>
+    <div style="text-align:right;margin-top:20px">
+      <button class="btn-secondary" onclick="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Zona impresión resguardo -->
+<div id="zona-impresion" style="display:none"></div>
+
+<script>
+// ═══════════════ DATOS ═══════════════
+const USUARIOS = {
+  "HVAGS26":    { nombre: "Coord. Aguascalientes",    coord: "AGUASCALIENTES",    rol: "coord" },
+  "HVBC26":     { nombre: "Coord. Baja California",   coord: "BAJA CALIFORNIA",   rol: "coord" },
+  "HVBCS26":    { nombre: "Coord. Baja California Sur", coord: "BAJA CALIFORNIA SUR", rol: "coord" },
+  "HVCAMP26":   { nombre: "Coord. Campeche",          coord: "CAMPECHE",          rol: "coord" },
+  "HVCHIS26":   { nombre: "Coord. Chiapas",           coord: "CHIAPAS",           rol: "coord" },
+  "HVCHIH26":   { nombre: "Coord. Chihuahua",         coord: "CHIHUAHUA",         rol: "coord" },
+  "HVCDMX26":   { nombre: "Coord. Ciudad de México",  coord: "CIUDAD DE MÉXICO",  rol: "coord" },
+  "HVCOAH26":   { nombre: "Coord. Coahuila",          coord: "COAHUILA",          rol: "coord" },
+  "HVCOL26":    { nombre: "Coord. Colima",            coord: "COLIMA",            rol: "coord" },
+  "HVDGO26":    { nombre: "Coord. Durango",           coord: "DURANGO",           rol: "coord" },
+  "HVEDOMEX26": { nombre: "Coord. Estado de México",  coord: "ESTADO DE MÉXICO",  rol: "coord" },
+  "HVGTO26":    { nombre: "Coord. Guanajuato",        coord: "GUANAJUATO",        rol: "coord" },
+  "HVGRO26":    { nombre: "Coord. Guerrero",          coord: "GUERRERO",          rol: "coord" },
+  "HVHGO26":    { nombre: "Coord. Hidalgo",           coord: "HIDALGO",           rol: "coord" },
+  "HVJAL26":    { nombre: "Coord. Jalisco",           coord: "JALISCO",           rol: "coord" },
+  "HVMICH26":   { nombre: "Coord. Michoacán",         coord: "MICHOACÁN",         rol: "coord" },
+  "HVMOR26":    { nombre: "Coord. Morelos",           coord: "MORELOS",           rol: "coord" },
+  "HVNAY26":    { nombre: "Coord. Nayarit",           coord: "NAYARIT",           rol: "coord" },
+  "HVNL26":     { nombre: "Coord. Nuevo León",        coord: "NUEVO LEÓN",        rol: "coord" },
+  "HVOAX26":    { nombre: "Coord. Oaxaca",            coord: "OAXACA",            rol: "coord" },
+  "HVPUE26":    { nombre: "Coord. Puebla",            coord: "PUEBLA",            rol: "coord" },
+  "HVQRO26":    { nombre: "Coord. Querétaro",         coord: "QUERÉTARO",         rol: "coord" },
+  "HVQROO26":   { nombre: "Coord. Quintana Roo",      coord: "QUINTANA ROO",      rol: "coord" },
+  "HVSLP26":    { nombre: "Coord. San Luis Potosí",   coord: "SAN LUIS POTOSÍ",   rol: "coord" },
+  "HVSIN26":    { nombre: "Coord. Sinaloa",           coord: "SINALOA",           rol: "coord" },
+  "HVSON26":    { nombre: "Coord. Sonora",            coord: "SONORA",            rol: "coord" },
+  "HVTAB26":    { nombre: "Coord. Tabasco",           coord: "TABASCO",           rol: "coord" },
+  "HVTAMPS26":  { nombre: "Coord. Tamaulipas",        coord: "TAMAULIPAS",        rol: "coord" },
+  "HVTLAX26":   { nombre: "Coord. Tlaxcala",          coord: "TLAXCALA",          rol: "coord" },
+  "HVVER26":    { nombre: "Coord. Veracruz",          coord: "VERACRUZ",          rol: "coord" },
+  "HVYUC26":    { nombre: "Coord. Yucatán",           coord: "YUCATÁN",           rol: "coord" },
+  "HVZAC26":    { nombre: "Coord. Zacatecas",         coord: "ZACATECAS",         rol: "coord" },
+  "CD5603":     { nombre: "Coordinación CDMX",        coord: "CIUDAD DE MÉXICO",  rol: "coord" },
+  "RM2024":     { nombre: "Recursos Materiales",      coord: "CORPORATIVO",       rol: "admin" },
+  "DIR2024":    { nombre: "Dirección General",        coord: "CORPORATIVO",       rol: "director" },
+};
+
+const CATALOGO = [
+  {c:"EQ-BAT9V",n:"BATERIA RECARGABLE 9V",cat:"Equipo Operativo",t:false},
+  {c:"EQ-BDHU",n:"BOTA DE HULE",cat:"Equipo Operativo",t:true},
+  {c:"COMP-HDMI",n:"CABLE HDMI",cat:"Cómputo",t:false},
+  {c:"EQ-CDSS",n:"CALZADO DE SEGURIDAD",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CDVS",n:"CALZADO DE VESTIR",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CSTN",n:"CALZADO ESTANDAR",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CTACT",n:"CALZADO TACTICO",cat:"Equipo Operativo",t:true},
+  {c:"CCTV-CAMD",n:"CAMARA DOMO",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-CAMB",n:"CAMARA BALA",cat:"Electrónica/CCTV",t:false},
+  {c:"EQ-CAMDV",n:"CAMISA DE VESTIR",cat:"Equipo Operativo",t:true},
+  {c:"EQ-POLO",n:"CAMISETA POLO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CMSBC",n:"CAMISOLA BLANCA",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CMSAZ",n:"CAMISOLA AZUL",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CHANTB",n:"CHALECO ANTIBALAS",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CHRAZ",n:"CHALECO AZUL MARINO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CHLNA",n:"CHALECO DE LONA",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CHRFL",n:"CHALECO REFLEJANTE",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CHANG",n:"CHAMARRA COLOR NEGRO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CHARP",n:"CHAMARRA ROMPE VIENTOS",cat:"Equipo Operativo",t:true},
+  {c:"COMP-CPU",n:"COMPUTADORA DE ESCRITORIO",cat:"Cómputo",t:false},
+  {c:"PAP-CONTR",n:"CONTRATOS",cat:"Papelería",t:false},
+  {c:"EQ-CORNG",n:"CORBATA COLOR NEGRO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-CDMNG",n:"CORDON DE MANDO NEGRO",cat:"Equipo Operativo",t:false},
+  {c:"EQ-CBRC",n:"CUBREBOCAS",cat:"Equipo Operativo",t:false},
+  {c:"EQ-GRRT",n:"DETECTOR DE METAL",cat:"Equipo Operativo",t:false},
+  {c:"CCTV-DD1TB",n:"DISCO DURO 1TB",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-DD2TB",n:"DISCO DURO 2TB",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-DD4TB",n:"DISCO DURO 4TB",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-DVR4",n:"DVR 4 CANALES",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-DVR8",n:"DVR 8 CANALES",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-DVR16",n:"DVR 16 CANALES",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-DVR32",n:"DVR 32 CANALES",cat:"Electrónica/CCTV",t:false},
+  {c:"EQ-FRNT",n:"FORNITURA",cat:"Equipo Operativo",t:false},
+  {c:"EQ-GS35G",n:"GAS 135G",cat:"Equipo Operativo",t:false},
+  {c:"EQ-GANTB",n:"GEL ANTIBACTERIAL",cat:"Equipo Operativo",t:false},
+  {c:"EQ-GRRNG",n:"GORRA COLOR NEGRO",cat:"Equipo Operativo",t:false},
+  {c:"EQ-HEBP",n:"HEBILLA DE PLASTICO",cat:"Equipo Operativo",t:false},
+  {c:"EQ-L7LD",n:"LAMPARA DE 7 LEDS",cat:"Equipo Operativo",t:false},
+  {c:"EQ-FLTR",n:"LIBRO FLORETE",cat:"Equipo Operativo",t:false},
+  {c:"EQ-MGIMP",n:"MANGA IMPERMEABLE",cat:"Equipo Operativo",t:false},
+  {c:"EQ-MEDIO",n:"MEDIO DE COMUNICACIÓN",cat:"Equipo Operativo",t:false},
+  {c:"MOB-ESC",n:"MESA DE ESCRITORIO",cat:"Mobiliario",t:false},
+  {c:"CCTV-MON19",n:'MONITOR DE 19"',cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-MON32",n:'PANTALLA DE 32"',cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-MON40",n:'PANTALLA DE 40"',cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-MON50",n:'PANTALLA DE 50"',cat:"Electrónica/CCTV",t:false},
+  {c:"EQ-PNTNG",n:"PANTALON COLOR NEGRO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-PNTCNG",n:"PANTALON DE CARGO COLOR ARENA",cat:"Equipo Operativo",t:true},
+  {c:"EQ-PNTCBG",n:"PANTALON DE CARGO COLOR NEGRO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-PTGR35",n:"PORTA GAS",cat:"Equipo Operativo",t:false},
+  {c:"EQ-PTPR",n:"PORTA PR-24",cat:"Equipo Operativo",t:false},
+  {c:"EQ-PR24",n:"PR-24",cat:"Equipo Operativo",t:false},
+  {c:"CCTV-RDTX6",n:"RADIO TXPRO",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-RDKEN",n:"RADIO KENWOOD",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-RDSTR",n:"RADIO STEREN",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-HYT508",n:"RADIO TRONKAL HYT 508",cat:"Electrónica/CCTV",t:false},
+  {c:"CCTV-HYT320",n:"RADIO TRONKAL TC-320",cat:"Electrónica/CCTV",t:false},
+  {c:"EQ-ROTL",n:"ROTULOS PARA AUTOMOVIL",cat:"Equipo Operativo",t:false},
+  {c:"CCTV-ROUT",n:"ROUTER",cat:"Electrónica/CCTV",t:false},
+  {c:"EQ-SBL",n:"SILBATO",cat:"Equipo Operativo",t:false},
+  {c:"CCTV-SPTP",n:"SOPORTE PARA PANTALLA",cat:"Electrónica/CCTV",t:false},
+  {c:"VEH-TDC",n:"TARJETA DE COMBUSTIBLE",cat:"Vehículos",t:false},
+  {c:"EQ-SIM",n:"TARJETA SIM",cat:"Equipo Operativo",t:false},
+  {c:"EQ-TREJC",n:"TRAJE EJECUTIVO CABALLERO",cat:"Equipo Operativo",t:true},
+  {c:"EQ-TREJD",n:"TRAJE EJECUTIVO DAMA",cat:"Equipo Operativo",t:true},
+  {c:"COMP-UPS",n:"UPS",cat:"Cómputo",t:false},
+  {c:"VEH-OPP",n:"VEHICULO OPERATIVO RAM",cat:"Vehículos",t:false},
+  {c:"VEH-OPS",n:"VEHICULO OPERATIVO SEDAN",cat:"Vehículos",t:false},
+];
+
+const TALLAS = ["NO APLICA","22","23","24","25","26","27","28","29","30","32","34","36","38","40","42","44","46","48","CH","M","G","XG","XXG"];
+
+let usuarioActual = null;
+let solicitudes = JSON.parse(localStorage.getItem('hv_solicitudes') || '[]');
+let resguardos  = JSON.parse(localStorage.getItem('hv_resguardos')  || '[]');
+let inventario  = JSON.parse(localStorage.getItem('hv_inventario')  || '{}');
+let contFolios  = parseInt(localStorage.getItem('hv_folios') || '1');
+
+// ═══════════════ UTILIDADES ═══════════════
+function guardar() {
+  localStorage.setItem('hv_solicitudes', JSON.stringify(solicitudes));
+  localStorage.setItem('hv_resguardos',  JSON.stringify(resguardos));
+  localStorage.setItem('hv_inventario',  JSON.stringify(inventario));
+  localStorage.setItem('hv_folios',      contFolios);
+}
+
+function generarFolio(prefijo='SOL') {
+  const año = new Date().getFullYear();
+  const num  = String(contFolios).padStart(4,'0');
+  contFolios++;
+  return `${prefijo}-${año}-${num}`;
+}
+
+function fechaHoy() {
+  return new Date().toLocaleDateString('es-MX', {day:'2-digit',month:'2-digit',year:'numeric'});
+}
+
+function toast(msg, tipo='ok') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = tipo === 'error' ? '#DC2626' : '#1E3A5F';
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 3500);
+}
+
+function cerrarModal() {
+  document.getElementById('modal-detalle').classList.remove('visible');
+}
+
+function opcionesArticulo(selVal='') {
+  return CATALOGO.map(a =>
+    `<option value="${a.c}" data-talla="${a.t}" ${a.c===selVal?'selected':''}>${a.n} (${a.c})</option>`
+  ).join('');
+}
+
+function opcionesTalla(selVal='') {
+  return TALLAS.map(t => `<option ${t===selVal?'selected':''}>${t}</option>`).join('');
+}
+
+// ═══════════════ LOGIN ═══════════════
+function intentarLogin() {
+  const pin = document.getElementById('input-pin').value.trim().toUpperCase();
+  if (USUARIOS[pin]) {
+    usuarioActual = { ...USUARIOS[pin], pin };
+    document.getElementById('pantalla-login').style.display = 'none';
+    document.getElementById('app').style.display = 'flex';
+    document.getElementById('header-usuario').textContent =
+      `${usuarioActual.nombre} · ${usuarioActual.coord}`;
+
+    // Mostrar/ocultar tabs según rol
+    const esAdmin = ['admin','director'].includes(usuarioActual.rol);
+    document.getElementById('tab-resguardo').style.display = esAdmin ? 'flex' : 'none';
+    document.getElementById('tab-inventario').style.display = esAdmin ? 'flex' : 'none';
+    document.getElementById('tab-dashboard').style.display  = esAdmin ? 'flex' : 'none';
+
+    // Precargar coord si es coordinador
+    if (usuarioActual.rol === 'coord') {
+      document.getElementById('sol-coord').value = usuarioActual.coord;
+    }
+
+    inicializar();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+    setTimeout(() => document.getElementById('login-error').style.display = 'none', 3000);
+  }
+}
+
+function cerrarSesion() {
+  usuarioActual = null;
+  document.getElementById('pantalla-login').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('input-pin').value = '';
+}
+
+// ═══════════════ NAVEGACIÓN ═══════════════
+function mostrarModulo(id, tab) {
+  document.querySelectorAll('[id^="mod-"]').forEach(m => m.classList.add('hidden'));
+  document.querySelectorAll('.modulo-tab').forEach(t => t.classList.remove('activo'));
+  document.getElementById('mod-' + id).classList.remove('hidden');
+  tab.classList.add('activo');
+  if (id === 'mis-solicitudes') renderSolicitudes();
+  if (id === 'resguardo')       renderResguardos();
+  if (id === 'inventario')      renderInventario();
+  if (id === 'dashboard')       renderDashboard();
+}
+
+// ═══════════════ SOLICITUD ═══════════════
+function inicializar() {
+  document.getElementById('fecha-sol').value = fechaHoy();
+  document.getElementById('folio-preview').value = '';
+  if (document.getElementById('tbody-articulos').children.length === 0) agregarFila();
+  renderInventarioBase();
+}
+
+function agregarFila() {
+  const tbody = document.getElementById('tbody-articulos');
+  const n = tbody.children.length + 1;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td style="color:#94a3b8;font-size:12px;text-align:center">${n}</td>
+    <td><select class="art-select" onchange="actualizarTalla(this)">
+      <option value="">— Selecciona artículo —</option>${opcionesArticulo()}</select></td>
+    <td><select class="talla-select">${opcionesTalla()}</select></td>
+    <td><input type="number" class="cant-input" min="1" value="1" style="width:70px"></td>
+    <td><input type="text" class="obs-input" placeholder="Observación..."></td>
+    <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#dc2626;font-size:16px">✕</button></td>`;
+  tbody.appendChild(tr);
+}
+
+function actualizarTalla(sel) {
+  const art  = CATALOGO.find(a => a.c === sel.value);
+  const row  = sel.closest('tr');
+  const tSel = row.querySelector('.talla-select');
+  if (art && !art.t) { tSel.value = 'NO APLICA'; tSel.disabled = true; }
+  else { tSel.disabled = false; }
+}
+
+function limpiarFormulario() {
+  ['sol-nombre','sol-correo','sol-justificacion'].forEach(id => document.getElementById(id).value = '');
+  ['sol-coord','sol-servicio','sol-empresa'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('tbody-articulos').innerHTML = '';
+  document.getElementById('folio-preview').value = '';
+  agregarFila();
+}
+
+function enviarSolicitud() {
+  const nombre = document.getElementById('sol-nombre').value.trim();
+  const coord  = document.getElementById('sol-coord').value;
+  const serv   = document.getElementById('sol-servicio').value;
+  const emp    = document.getElementById('sol-empresa').value;
+  const just   = document.getElementById('sol-justificacion').value.trim();
+
+  if (!nombre || !coord || !serv || !emp || !just) {
+    toast('Complete todos los campos obligatorios.', 'error'); return;
+  }
+
+  const filas = document.querySelectorAll('#tbody-articulos tr');
+  const arts = [];
+  for (const tr of filas) {
+    const art  = tr.querySelector('.art-select')?.value;
+    const talla= tr.querySelector('.talla-select')?.value;
+    const cant = tr.querySelector('.cant-input')?.value;
+    const obs  = tr.querySelector('.obs-input')?.value;
+    if (!art) { toast('Selecciona un artículo en todas las filas.','error'); return; }
+    const item = CATALOGO.find(a => a.c === art);
+    arts.push({ codigo: art, nombre: item?.n || art, talla, cantidad: cant, obs });
+  }
+
+  const folio = generarFolio('SOL');
+  const sol = {
+    folio, fecha: fechaHoy(), solicitante: nombre,
+    correo: document.getElementById('sol-correo').value,
+    coordinacion: coord, servicio: serv, empresa: emp,
+    justificacion: just, articulos: arts, estado: 'En revisión',
+    historial: [{ fecha: fechaHoy(), accion: 'Solicitud enviada', usuario: nombre }]
+  };
+  solicitudes.unshift(sol);
+  guardar();
+
+  // Mostrar modal de confirmación
+  document.getElementById('modal-contenido').innerHTML = `
+    <div class="modal-folio">
+      <p>Solicitud registrada exitosamente</p>
+      <div class="folio-num">${folio}</div>
+      <p>Guarda este folio para seguimiento</p>
+    </div>
+    <div class="detalle-grid">
+      <div class="detalle-item"><label>Solicitante</label><span>${nombre}</span></div>
+      <div class="detalle-item"><label>Coordinación</label><span>${coord}</span></div>
+      <div class="detalle-item"><label>Servicio</label><span>${serv}</span></div>
+      <div class="detalle-item"><label>Empresa</label><span>${emp}</span></div>
+      <div class="detalle-item"><label>Fecha</label><span>${fechaHoy()}</span></div>
+      <div class="detalle-item"><label>Estado</label><span><span class="badge badge-amarillo">En revisión</span></span></div>
+    </div>
+    <div style="background:#f8fafc;border-radius:8px;padding:12px;margin-top:8px">
+      <strong style="font-size:12px;color:#64748b">ARTÍCULOS SOLICITADOS</strong>
+      ${arts.map((a,i) => `<div style="margin-top:6px;font-size:13px">${i+1}. ${a.nombre}${a.talla&&a.talla!=='NO APLICA'?' · Talla '+a.talla:''} · <strong>${a.cantidad} pza.</strong></div>`).join('')}
+    </div>`;
+  document.getElementById('modal-detalle').classList.add('visible');
+  limpiarFormulario();
+}
+
+// ═══════════════ MIS SOLICITUDES ═══════════════
+function renderSolicitudes(lista = null) {
+  const datos = lista || solicitudes.filter(s =>
+    usuarioActual.rol === 'coord' ? s.coordinacion === usuarioActual.coord : true
+  );
+  const tbody = document.getElementById('tbody-solicitudes');
+  tbody.innerHTML = '';
+  document.getElementById('vacio-solicitudes').classList.toggle('hidden', datos.length > 0);
+
+  datos.forEach(s => {
+    const estadoBadge = {
+      'En revisión': 'badge-amarillo', 'En proceso': 'badge-azul',
+      'Entregada': 'badge-verde', 'Rechazada': 'badge-rojo'
+    }[s.estado] || 'badge-gris';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${s.folio}</strong></td>
+      <td>${s.fecha}</td>
+      <td>${s.coordinacion}</td>
+      <td>${s.servicio}</td>
+      <td>${s.articulos.length} artículo(s)</td>
+      <td><span class="badge ${estadoBadge}">${s.estado}</span></td>
+      <td><button class="btn-secondary" style="padding:5px 12px;font-size:12px" onclick="verDetalleSolicitud('${s.folio}')">Ver detalle</button>
+      ${usuarioActual.rol==='admin'?`<select onchange="cambiarEstado('${s.folio}',this.value)" style="margin-left:6px;padding:5px;border:1px solid #e2e8f0;border-radius:6px;font-size:12px">
+        <option value="">Cambiar estado</option>
+        <option>En revisión</option><option>En proceso</option>
+        <option>Entregada</option><option>Rechazada</option>
+      </select>`:''}
+      </td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function filtrarSolicitudes() {
+  const q     = document.getElementById('buscar-sol').value.toLowerCase();
+  const est   = document.getElementById('filtro-estado').value;
+  const todos = solicitudes.filter(s =>
+    usuarioActual.rol === 'coord' ? s.coordinacion === usuarioActual.coord : true
+  );
+  const filt = todos.filter(s =>
+    (!q || s.folio.toLowerCase().includes(q) || s.coordinacion.toLowerCase().includes(q) ||
+     s.articulos.some(a => a.nombre.toLowerCase().includes(q))) &&
+    (!est || s.estado === est)
+  );
+  renderSolicitudes(filt);
+}
+
+function cambiarEstado(folio, nuevoEstado) {
+  if (!nuevoEstado) return;
+  const s = solicitudes.find(x => x.folio === folio);
+  if (s) {
+    s.estado = nuevoEstado;
+    s.historial.push({ fecha: fechaHoy(), accion: `Estado cambiado a: ${nuevoEstado}`, usuario: usuarioActual.nombre });
+    guardar(); renderSolicitudes(); toast(`Estado actualizado: ${nuevoEstado}`);
+  }
+}
+
+function verDetalleSolicitud(folio) {
+  const s = solicitudes.find(x => x.folio === folio);
+  if (!s) return;
+  const badge = {'En revisión':'badge-amarillo','En proceso':'badge-azul','Entregada':'badge-verde','Rechazada':'badge-rojo'}[s.estado]||'badge-gris';
+  document.getElementById('modal-contenido').innerHTML = `
+    <h3>Detalle de Solicitud</h3>
+    <div class="modal-folio"><p>Folio</p><div class="folio-num">${s.folio}</div></div>
+    <div class="detalle-grid">
+      <div class="detalle-item"><label>Solicitante</label><span>${s.solicitante}</span></div>
+      <div class="detalle-item"><label>Coordinación</label><span>${s.coordinacion}</span></div>
+      <div class="detalle-item"><label>Servicio</label><span>${s.servicio}</span></div>
+      <div class="detalle-item"><label>Empresa</label><span>${s.empresa}</span></div>
+      <div class="detalle-item"><label>Fecha</label><span>${s.fecha}</span></div>
+      <div class="detalle-item"><label>Estado</label><span><span class="badge ${badge}">${s.estado}</span></span></div>
+    </div>
+    <div style="background:#f8fafc;border-radius:8px;padding:12px;margin-top:8px;margin-bottom:16px">
+      <strong style="font-size:12px;color:#64748b">ARTÍCULOS</strong>
+      ${s.articulos.map((a,i) => `<div style="margin-top:6px;font-size:13px">${i+1}. ${a.nombre}${a.talla&&a.talla!=='NO APLICA'?' · T:'+a.talla:''} · <strong>${a.cantidad} pza.</strong>${a.obs?' — '+a.obs:''}</div>`).join('')}
+    </div>
+    <div style="background:#f8fafc;border-radius:8px;padding:12px">
+      <strong style="font-size:12px;color:#64748b">HISTORIAL</strong>
+      ${s.historial.map(h => `<div style="margin-top:6px;font-size:12px;color:#64748b">${h.fecha} — ${h.accion}</div>`).join('')}
+    </div>`;
+  document.getElementById('modal-detalle').classList.add('visible');
+}
+
+// ═══════════════ RESGUARDO ═══════════════
+function mostrarFormResguardo() {
+  document.getElementById('form-resguardo').classList.remove('hidden');
+  document.getElementById('rsg-fecha').value = new Date().toISOString().split('T')[0];
+  if (document.getElementById('tbody-rsg').children.length === 0) agregarFilaRsg();
+}
+
+function agregarFilaRsg() {
+  const tbody = document.getElementById('tbody-rsg');
+  const n = tbody.children.length + 1;
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td style="color:#94a3b8;font-size:12px;text-align:center">${n}</td>
+    <td><select class="art-select" onchange="actualizarTallaRsg(this)">
+      <option value="">— Artículo —</option>${opcionesArticulo()}</select></td>
+    <td><select class="talla-select">${opcionesTalla()}</select></td>
+    <td><input type="number" class="cant-input" min="1" value="1" style="width:70px"></td>
+    <td><select style="width:100%"><option>Nuevo</option><option>Bueno</option><option>Regular</option><option>Malo</option></select></td>
+    <td><button onclick="this.closest('tr').remove()" style="background:none;border:none;cursor:pointer;color:#dc2626;font-size:16px">✕</button></td>`;
+  tbody.appendChild(tr);
+}
+
+function actualizarTallaRsg(sel) {
+  const art = CATALOGO.find(a => a.c === sel.value);
+  const row = sel.closest('tr');
+  const ts  = row.querySelector('.talla-select');
+  if (art && !art.t) { ts.value = 'NO APLICA'; ts.disabled = true; }
+  else { ts.disabled = false; }
+}
+
+function guardarResguardo() {
+  const noEmp  = document.getElementById('rsg-noEmp').value.trim();
+  const nombre = document.getElementById('rsg-nombre').value.trim();
+  if (!noEmp || !nombre) { toast('Complete No. Empleado y Nombre.','error'); return; }
+
+  const filas = document.querySelectorAll('#tbody-rsg tr');
+  const arts = [];
+  for (const tr of filas) {
+    const art   = tr.querySelector('.art-select')?.value;
+    if (!art) { toast('Selecciona artículo en todas las filas.','error'); return; }
+    const item  = CATALOGO.find(a => a.c === art);
+    const talla = tr.querySelector('.talla-select')?.value;
+    const cant  = parseInt(tr.querySelector('.cant-input')?.value) || 1;
+    const cond  = tr.querySelectorAll('select')[2]?.value || 'Nuevo';
+    arts.push({ codigo: art, nombre: item?.n || art, talla, cantidad: cant, condicion: cond });
+    // Actualizar inventario (salida)
+    if (!inventario[art]) inventario[art] = { entradas: 0, salidas: 0, minimo: 0 };
+    inventario[art].salidas += cant;
+  }
+
+  const folio = generarFolio('RSG');
+  resguardos.unshift({
+    folio, fecha: document.getElementById('rsg-fecha').value,
+    noEmpleado: noEmp, nombre,
+    coordinacion: document.getElementById('rsg-coord').value,
+    servicio: document.getElementById('rsg-servicio').value,
+    empresa: document.getElementById('rsg-empresa').value,
+    puesto: document.getElementById('rsg-puesto').value,
+    folioSolicitud: document.getElementById('rsg-folioSol').value,
+    articulos: arts, estado: 'Activo'
+  });
+  guardar();
+  document.getElementById('form-resguardo').classList.add('hidden');
+  document.getElementById('tbody-rsg').innerHTML = '';
+  renderResguardos();
+  toast(`Resguardo ${folio} guardado correctamente.`);
+}
+
+function renderResguardos() {
+  const tbody = document.getElementById('tbody-resguardos');
+  tbody.innerHTML = '';
+  document.getElementById('vacio-resguardos').style.display = resguardos.length > 0 ? 'none' : 'block';
+  resguardos.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${r.folio}</strong></td>
+      <td>${r.fecha}</td>
+      <td>${r.noEmpleado}</td>
+      <td>${r.nombre}</td>
+      <td>${r.coordinacion||'—'}</td>
+      <td>${r.articulos.length} artículo(s)</td>
+      <td><button class="btn-secondary" style="padding:5px 12px;font-size:12px" onclick="imprimirResguardoById('${r.folio}')">🖨️ Imprimir</button></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function imprimirResguardoById(folio) {
+  const r = resguardos.find(x => x.folio === folio);
+  if (!r) return;
+  const html = generarHTMLResguardo(r);
+  const w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
+  w.print();
+}
+
+function generarHTMLResguardo(r) {
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8">
+  <style>body{font-family:Arial,sans-serif;font-size:12px;color:#1e293b;padding:20px}
+  h1{font-size:16px;color:#1e3a5f;text-align:center;margin-bottom:4px}
+  .sub{text-align:center;font-size:11px;color:#64748b;margin-bottom:20px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+  .campo label{font-size:10px;font-weight:bold;color:#64748b;text-transform:uppercase}
+  .campo span{display:block;font-size:12px;border-bottom:1px solid #e2e8f0;padding-bottom:4px}
+  table{width:100%;border-collapse:collapse;margin-bottom:20px}
+  th{background:#1e3a5f;color:#fff;padding:8px;font-size:11px;text-align:left}
+  td{padding:7px 8px;border-bottom:1px solid #e2e8f0;font-size:11px}
+  tr:nth-child(even)td{background:#f8fafc}
+  .firmas{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:40px}
+  .firma{border-top:2px solid #1e3a5f;padding-top:8px;text-align:center;font-size:11px}
+  .nota{font-size:10px;color:#64748b;font-style:italic;margin-bottom:20px;border:1px solid #e2e8f0;padding:10px;border-radius:6px}
+  </style></head><body>
+  <h1>HIVICO SEGURIDAD PRIVADA</h1>
+  <div class="sub">DOCUMENTO DE RESGUARDO DE EQUIPO Y UNIFORMES · Folio: <strong>${r.folio}</strong></div>
+  <div class="grid">
+    <div class="campo"><label>No. Empleado</label><span>${r.noEmpleado}</span></div>
+    <div class="campo"><label>Nombre completo</label><span>${r.nombre}</span></div>
+    <div class="campo"><label>Puesto</label><span>${r.puesto||'—'}</span></div>
+    <div class="campo"><label>Empresa</label><span>${r.empresa||'—'}</span></div>
+    <div class="campo"><label>Coordinación</label><span>${r.coordinacion||'—'}</span></div>
+    <div class="campo"><label>Servicio / Cliente</label><span>${r.servicio||'—'}</span></div>
+    <div class="campo"><label>Fecha de entrega</label><span>${r.fecha}</span></div>
+    <div class="campo"><label>Folio Solicitud</label><span>${r.folioSolicitud||'—'}</span></div>
+  </div>
+  <table>
+    <tr><th>#</th><th>Artículo</th><th>Talla</th><th>Cantidad</th><th>Condición</th></tr>
+    ${r.articulos.map((a,i)=>`<tr><td>${i+1}</td><td>${a.nombre}</td><td>${a.talla||'—'}</td><td>${a.cantidad}</td><td>${a.condicion}</td></tr>`).join('')}
+  </table>
+  <div class="nota">Por medio de la presente hago constar que recibo en buen estado el equipo descrito, comprometiéndome a su uso exclusivo para las actividades propias del servicio, así como a su resguardo, conservación y devolución al término de mi contrato o cuando sea requerido por la empresa.</div>
+  <div class="firmas">
+    <div class="firma">NOMBRE Y FIRMA DEL ELEMENTO<br><br><small>No. Empleado: ${r.noEmpleado}</small></div>
+    <div class="firma">NOMBRE Y FIRMA QUIEN ENTREGA<br><br><small>Recursos Materiales</small></div>
+  </div>
+  <div style="text-align:center;margin-top:20px;font-size:9px;color:#94a3b8">
+    HIVICO Seguridad Privada · Recursos Materiales · ${r.fecha}
+  </div>
+  </body></html>`;
+}
+
+// ═══════════════ INVENTARIO ═══════════════
+function renderInventarioBase() {
+  CATALOGO.forEach(a => {
+    if (!inventario[a.c]) inventario[a.c] = { entradas: 0, salidas: 0, minimo: 0 };
+  });
+  guardar();
+}
+
+function renderInventario(lista = null) {
+  const datos = lista || CATALOGO;
+  const tbody = document.getElementById('tbody-inventario');
+  tbody.innerHTML = '';
+  datos.forEach(a => {
+    const inv = inventario[a.c] || { entradas: 0, salidas: 0, minimo: 0 };
+    const exist = inv.entradas - inv.salidas;
+    let alerta, badgeClass;
+    if (exist <= 0)          { alerta = '🔴 SIN STOCK'; badgeClass = 'badge-rojo'; }
+    else if (exist <= inv.minimo) { alerta = '🟡 STOCK BAJO'; badgeClass = 'badge-amarillo'; }
+    else                     { alerta = '🟢 OK';        badgeClass = 'badge-verde'; }
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td style="font-family:monospace;font-size:12px">${a.c}</td>
+      <td><strong>${a.n}</strong></td>
+      <td><span class="badge badge-gris">${a.cat}</span></td>
+      <td style="text-align:center;color:#15803d"><strong>${inv.entradas}</strong></td>
+      <td style="text-align:center;color:#dc2626"><strong>${inv.salidas}</strong></td>
+      <td style="text-align:center;font-size:16px;font-weight:700">${exist}</td>
+      <td style="text-align:center">
+        <input type="number" value="${inv.minimo}" min="0" style="width:60px;padding:4px;border:1px solid #e2e8f0;border-radius:4px;text-align:center"
+          onchange="actualizarMinimo('${a.c}',this.value)">
+      </td>
+      <td><span class="badge ${badgeClass}">${alerta}</span></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+function actualizarMinimo(cod, val) {
+  if (!inventario[cod]) inventario[cod] = { entradas: 0, salidas: 0, minimo: 0 };
+  inventario[cod].minimo = parseInt(val) || 0;
+  guardar();
+}
+
+function filtrarInventario() {
+  const q   = document.getElementById('buscar-inv').value.toLowerCase();
+  const cat = document.getElementById('filtro-cat').value;
+  const filt = CATALOGO.filter(a =>
+    (!q || a.n.toLowerCase().includes(q) || a.c.toLowerCase().includes(q)) &&
+    (!cat || a.cat === cat)
+  );
+  renderInventario(filt);
+}
+
+// ═══════════════ DASHBOARD ═══════════════
+function renderDashboard() {
+  const total   = solicitudes.length;
+  const rev     = solicitudes.filter(s => s.estado === 'En revisión').length;
+  const proc    = solicitudes.filter(s => s.estado === 'En proceso').length;
+  const ent     = solicitudes.filter(s => s.estado === 'Entregada').length;
+  const sinStock= CATALOGO.filter(a => {
+    const i = inventario[a.c]; return i && (i.entradas - i.salidas) <= 0;
+  }).length;
+
+  document.getElementById('kpi-dashboard').innerHTML = `
+    <div class="kpi-card kpi-azul"><div class="kpi-val">${total}</div><div class="kpi-lbl">Total solicitudes</div></div>
+    <div class="kpi-card kpi-amarillo"><div class="kpi-val">${rev}</div><div class="kpi-lbl">En revisión</div></div>
+    <div class="kpi-card kpi-azul"><div class="kpi-val">${proc}</div><div class="kpi-lbl">En proceso</div></div>
+    <div class="kpi-card kpi-verde"><div class="kpi-val">${ent}</div><div class="kpi-lbl">Entregadas</div></div>
+    <div class="kpi-card kpi-rojo"><div class="kpi-val">${sinStock}</div><div class="kpi-lbl">Artículos sin stock</div></div>
+    <div class="kpi-card"><div class="kpi-val">${resguardos.length}</div><div class="kpi-lbl">Resguardos activos</div></div>`;
+
+  const tbody = document.getElementById('tbody-dashboard');
+  tbody.innerHTML = '';
+  const pendientes = solicitudes.filter(s => ['En revisión','En proceso'].includes(s.estado));
+  if (pendientes.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#64748b;padding:24px">Sin solicitudes pendientes ✅</td></tr>';
+  } else {
+    pendientes.forEach(s => {
+      const badge = s.estado==='En revisión'?'badge-amarillo':'badge-azul';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td><strong>${s.folio}</strong></td><td>${s.fecha}</td><td>${s.coordinacion}</td>
+        <td>${s.articulos.length} artículo(s)</td>
+        <td><span class="badge ${badge}">${s.estado}</span></td>`;
+      tbody.appendChild(tr);
+    });
+  }
+}
+
+// ═══════════════ INICIO ═══════════════
+document.getElementById('sol-coord')?.addEventListener('change', function() {
+  if (usuarioActual?.rol === 'coord' && this.value !== usuarioActual.coord) {
+    this.value = usuarioActual.coord;
+    toast('No puedes cambiar tu coordinación asignada.','error');
+  }
+});
+
+renderInventarioBase();
+</script>
+</body>
+</html>
