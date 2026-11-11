@@ -56,6 +56,25 @@ Reglas: cada actividad tiene **un solo A**; si una fila no tiene R, nadie lo har
 
 ---
 
-## Página 5 · Siguiente paso
+## Página 5 · Autodiagnóstico de liderazgo (añadido en semana 2)
+Basado en el modelo de liderazgo de **García-Solarte (2015)**: el liderazgo no depende solo del líder, sino de 9 elementos que interactúan. Califica cada uno del 1 (muy débil) al 5 (muy fuerte).
+
+| # | Elemento | Pregunta clave | 1–5 |
+|---|---|---|---|
+| 1 | Ambiente | ¿Entiendo los cambios externos que afectan a mi empresa? | |
+| 2 | Situación específica | ¿Adapto mi forma de dirigir a cada situación y área? | |
+| 3 | Líder | ¿Doy el ejemplo que pido a los demás? | |
+| 4 | Organización | ¿Estructura, políticas y cultura ayudan (o estorban) a lo que quiero lograr? | |
+| 5 | Seguidores | ¿Conozco las capacidades y motivaciones de mi equipo? | |
+| 6 | Estrategia | ¿Todos saben hacia dónde vamos y por qué? | |
+| 7 | Resultados | ¿Medimos lo que importa y lo revisamos con frecuencia? | |
+| 8 | Clientes y comunidad | ¿Mis decisiones consideran al cliente y al entorno? | |
+| 9 | Comunicación | ¿La información fluye en ambos sentidos, sin miedo? | |
+
+**Lectura:** el elemento con menor calificación es tu primer frente de trabajo. Menos de 27 puntos en total = el liderazgo está recayendo demasiado en una sola persona.
+
+---
+
+## Página 6 · Siguiente paso
 ¿Marcaste 4 o más señales? Escríbeme **DIAGNÓSTICO** por mensaje directo y te digo por dónde empezar.
 Reel nuevo todos los días en @gestion_360mx

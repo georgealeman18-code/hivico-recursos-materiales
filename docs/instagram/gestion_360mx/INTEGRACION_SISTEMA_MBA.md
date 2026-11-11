@@ -91,3 +91,23 @@ Ajuste aplicado: en ManyChat, la palabra **DIAGNÓSTICO** ahora presenta el *Dia
 | 4 | Generar los 7 guiones + 42 historias desde el episodio | Claude (a solicitud) | Cada sábado |
 | 5 | Registrar métricas semanales en Notion | Titular de la cuenta | Cada lunes |
 | 6 | Revisión de canales (Instagram vs. LinkedIn) | Titular de la cuenta | Febrero 2027 |
+
+## 10. Protocolo de fuentes (Google Drive › ESTUDIOS › MBA UTEL)
+Cada semana de Instagram se genera a partir de la carpeta de la semana correspondiente de la materia, **tomando en cuenta todo lo que se haya agregado**:
+
+| Semana de Instagram | Fechas | Carpeta de Drive |
+|---|---|---|
+| 1 | 16–22 nov | SEMANA 1 ADMINISTRACIÓN DE LAS ORGANIZACIONES (incl. “SEMANA 1 ADMINISTRACIÓN MODERNA”) |
+| 2 | 23–29 nov | SEMANA 2 De la teoría científica al enfoque organizacional |
+| 3 | 30 nov–6 dic | SEMANA 3 Administración y organización |
+| n | … | SEMANA n (carpeta nueva por cada semana de la materia) |
+
+**Pasos para generar cada semana:**
+1. Leer todos los archivos de la carpeta: Open Class, caso, lecturas, resumen de la unidad y trabajos propios.
+2. Extraer: conceptos clave, autores citables, caso real, herramienta aplicable, mito común y error costoso.
+3. Asignar a las 7 series del calendario y generar 42 historias (los quiz repasan la unidad).
+4. Listar las fuentes usadas al inicio del documento de la semana.
+5. Si la semana trae una herramienta nueva, agregarla como página al Kit de Dirección 360.
+6. No publicar tareas, exámenes ni material de la plataforma; citar autores.
+
+**Kit de Dirección 360:** el archivo `KIT_DIRECCION_360.md` está en la raíz de MBA UTEL. Para ManyChat se necesita el **PDF** con enlace de solo lectura; el .md es la fuente editable.
