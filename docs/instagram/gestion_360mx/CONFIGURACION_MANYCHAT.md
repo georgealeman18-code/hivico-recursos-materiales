@@ -65,7 +65,8 @@ Si en Meta Business Suite activaste **respuesta instantánea**, desactívala o d
 ## 4. Automatización secundaria: palabra “DIAGNÓSTICO” por DM
 - Disparador: **El usuario envía un mensaje directo** con palabra clave `DIAGNÓSTICO` / `diagnostico`.
 - Acción: etiqueta `Prospecto asesoría` + mensaje:
-> ¡Gracias por escribir! Para orientarte bien, cuéntame en 2–3 líneas: ¿a qué se dedica tu empresa, cuántas personas son y cuál es el reto que más te quita el sueño? Te respondo personalmente en menos de 24 h.
+> ¡Gracias por escribir! 🙌 Estoy abriendo lugares para el **Diagnóstico de salud de equipos directivos**: evaluamos a tu equipo de mando con el modelo de las 5 disfunciones de Lencioni (confianza, conflicto, compromiso, rendición de cuentas y resultados) y te entrego un reporte con hallazgos y recomendaciones.
+> Para ver si aplica, cuéntame en 2–3 líneas: ¿a qué se dedica tu empresa, cuántas personas integran tu equipo directivo y cuál es el reto que más te quita el sueño? Te respondo personalmente en menos de 24 h.
 - Notificación: activar **aviso al administrador** (app de ManyChat) para responder tú mismo.
 
 ## 5. Etiquetas y campos a crear
