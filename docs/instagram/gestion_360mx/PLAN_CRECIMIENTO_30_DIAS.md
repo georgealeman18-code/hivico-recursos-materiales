@@ -22,7 +22,7 @@
 4. **Dependencia de un solo éxito**: no se sabe aún por qué funcionó; hay que probarlo con variantes.
 
 ## 3. Decisión recomendada
-**Replicar el formato ganador 3 veces por semana y publicar 5 reels por semana durante 30 días**, con una sola fórmula de guion, y corregir el perfil hoy mismo.
+**Publicar 7 reels por semana (1 diario) y 6 historias diarias durante 30 días**, replicando el formato ganador 3 veces por semana, producción en bloque con plantillas, y corregir el perfil hoy mismo.
 
 ## 4. Correcciones de perfil (hoy, 15 minutos)
 
@@ -30,9 +30,9 @@
 ```
 Dirige mejor tu empresa con casos reales 📊
 Estrategia · Organización · Liderazgo
-Reels nuevos L-V ⬇️ Guía gratis aquí
+Reel nuevo todos los días ⬇️ Guía gratis
 ```
-- Cambiar “Nuevo video cada día” por **“Reels nuevos L-V”** (promesa que sí se cumple).
+- Mantener la promesa diaria **solo si se sostiene el calendario de 7 reels**; si una semana baja el ritmo, cambiar a “Reels nuevos L-V”.
 - **Enlace:** página o formulario con un recurso gratuito (ej. “Checklist: 10 señales de que tu empresa no tiene estructura”) para capturar correos/WhatsApp.
 - **Categoría:** “Educación” o “Consultor empresarial” visible.
 - **Destacadas (4):** Empieza aquí · Casos reales · Herramientas · Asesoría.
@@ -80,18 +80,72 @@ Reglas: duración 30–45 s · subtítulos siempre · primera frase en texto des
 19. Cómo hacer un organigrama de 5 personas.
 20. Ciclo PHVA (Deming) con un ejemplo de una tiendita.
 
-## 7. Calendario de 4 semanas
+**Serie “Mito vs. realidad” (sábados, genera comentarios)**
+21. “Si contrato más gente, crezco más rápido.”
+22. “El buen líder siempre tiene la respuesta.”
+23. “Bajar precios es la forma más rápida de vender.”
+24. “Los manuales de procedimientos son burocracia.”
+25. “Si el empleado gana más, rinde más.”
+26. “El jefe debe ser el que más trabaja.”
 
-| Día | Formato | Serie |
+**Serie “Errores que cuestan dinero” (domingos, formato corto 20–30 s)**
+27. Contratar a un amigo sin perfil de puesto.
+28. No separar las finanzas personales de las de la empresa.
+29. Ascender al mejor vendedor a gerente.
+30. Comprar sin cotizar con 3 proveedores.
+31. No medir la rotación de personal.
+32. Fijar precios sin conocer tu costo real.
+
+## 7. Calendario: 7 reels por semana
+
+| Día | Serie | Objetivo |
 |---|---|---|
-| Lunes | Reel | Si diriges un… |
-| Martes | Reel | Herramienta en 30 s |
-| Miércoles | Reel | Si diriges un… |
-| Jueves | Reel / carrusel | Caso real |
-| Viernes | Reel | Si diriges un… |
-| Diario | 2–3 historias | Encuesta, “¿te ha pasado?”, detrás de cámaras, reenviar el reel del día |
+| Lunes | Si diriges un… | Alcance |
+| Martes | Herramienta en 30 s | Guardados |
+| Miércoles | Si diriges un… | Alcance |
+| Jueves | Caso real | Retención / autoridad |
+| Viernes | Si diriges un… | Alcance |
+| Sábado | Mito vs. realidad | Comentarios |
+| Domingo | Errores que cuestan dinero (20–30 s) | Compartidos |
 
-Producción en bloque: **grabar/generar 5 reels cada domingo** para no depender de la inspiración diaria. Horario sugerido: 7:00–8:30 o 19:00–21:00 (validar con Estadísticas a las 2 semanas).
+Mezcla mensual: 12 “Si diriges un…”, 4 herramientas, 4 casos, 4 mitos, 4 errores = **28 reels**.
+
+**Producción en bloque (para sostener 7 por semana sin quemarse):**
+| Bloque | Día | Entregable |
+|---|---|---|
+| Guiones | Sábado (1.5 h) | 7 guiones con la plantilla de la sección 5 |
+| Producción A | Domingo (3 h) | 4 reels editados y programados (L–J) |
+| Producción B | Miércoles (2 h) | 3 reels editados y programados (V–D) |
+| Reserva | Permanente | 3 reels “de emergencia” listos para días sin tiempo |
+
+Regla de calidad: si un reel no tiene gancho claro en los primeros 2 segundos, no se publica; se usa uno de la reserva.
+
+### 7.1 Historias: recomendación 6 diarias (rango 4–8)
+
+**Recomendación:** **6 historias al día** como estándar. **4** es el mínimo para días con poco tiempo; **8** solo en días de lanzamiento (recurso gratuito, asesoría, colaboración). Más de 8 diarias de forma constante eleva la tasa de salida y baja el alcance de las siguientes.
+
+| Bloque | Horario | Historias | Contenido |
+|---|---|---|---|
+| Mañana | 7:00–9:00 | 2 | Frase o pregunta del día + **encuesta** (“¿En tu empresa hay organigrama? Sí / No”) |
+| Mediodía | 13:00–15:00 | 2 | **Reenviar el reel del día** con texto “Nuevo 👇” + sticker de pregunta o quiz sobre el tema |
+| Noche | 19:00–21:00 | 2 | Respuesta a un comentario/DM de la audiencia + detrás de cámaras o llamado al enlace |
+
+**Temas fijos por día:**
+| Día | Dinámica de historias |
+|---|---|
+| Lunes | “Reto de la semana” para dirigir mejor |
+| Martes | Quiz de administración (3 preguntas) |
+| Miércoles | Caja de preguntas: “Pregúntame lo que quieras sobre dirigir” |
+| Jueves | Respuestas a la caja de preguntas (alimenta ideas de reels) |
+| Viernes | Encuesta + resultados de la semana |
+| Sábado | Detrás de cámaras / cómo se hace un reel |
+| Domingo | Resumen de la semana (los 7 reels) + adelanto |
+
+**Reglas:**
+- Máximo **1 historia con enlace por día**, y llamado al recurso gratuito 3 veces por semana.
+- Una interacción (encuesta, quiz, pregunta, deslizador) **todos los días**: es lo que más sube el alcance de las historias.
+- Si una historia pierde más del 10% de la audiencia frente a la anterior, acortar esa secuencia al día siguiente.
+- Guardar en destacadas las mejores respuestas y casos.
 
 ## 8. Interacción (los primeros 60 minutos deciden el alcance)
 - Responder todos los comentarios en la primera hora, con pregunta de regreso.
@@ -103,12 +157,15 @@ Producción en bloque: **grabar/generar 5 reels cada domingo** para no depender 
 
 | Indicador | Hoy | Meta |
 |---|---|---|
-| Publicaciones | 9 | 29 (+20) |
-| Visualizaciones 30 días | 2,2 mil | 50 mil |
-| Seguidores | 1,021 | 2,000 |
-| Reels > 5 mil vistas | 1 | 4 |
+| Publicaciones | 9 | 37 (+28 reels) |
+| Visualizaciones 30 días | 2,2 mil | 80 mil |
+| Seguidores | 1,021 | 2,500 |
+| Reels > 5 mil vistas | 1 | 6 |
 | Guardados promedio por reel | — (medir) | ≥ 30 |
-| Contactos captados (enlace/DM) | 0 | 50 |
+| Historias publicadas | — | ≥ 180 (6/día) |
+| Alcance promedio por historia | — (medir) | ≥ 10% de seguidores |
+| Respuestas a encuestas/quiz por día | — (medir) | ≥ 20 |
+| Contactos captados (enlace/DM) | 0 | 80 |
 
 Revisión semanal (cada lunes, 15 min): ¿qué reel tuvo más retención y guardados? → hacer 2 variantes de ese la semana siguiente; dejar de hacer lo que quedó por debajo de 500 vistas dos veces seguidas.
 
@@ -117,7 +174,7 @@ Revisión semanal (cada lunes, 15 min): ¿qué reel tuvo más retención y guard
 | Semana | Acción | Entregable |
 |---|---|---|
 | 0 (hoy) | Corregir bio, enlace, categoría, fijados y destacadas | Perfil renovado |
-| 1 | 5 reels “Si diriges un…” + recurso gratuito en el enlace | 5 piezas + lead magnet |
+| 1 | 7 reels (3 “Si diriges un…”) + 6 historias diarias + recurso gratuito en el enlace + 3 reels de reserva | 7 piezas + lead magnet |
 | 2 | Mezcla completa del calendario; primera revisión de métricas | Reporte semana 1 |
-| 3 | Doblar lo que funcionó; primera colaboración | 5 piezas + collab |
+| 3 | Doblar lo que funcionó; primera colaboración | 7 piezas + collab |
 | 4 | Lanzar oferta (asesoría/diagnóstico) a la lista captada | Reporte mensual y ajustes |
