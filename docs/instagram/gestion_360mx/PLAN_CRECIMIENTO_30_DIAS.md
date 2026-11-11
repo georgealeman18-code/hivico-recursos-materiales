@@ -149,7 +149,7 @@ Regla de calidad: si un reel no tiene gancho claro en los primeros 2 segundos, n
 
 ## 8. Interacción (los primeros 60 minutos deciden el alcance)
 - Responder todos los comentarios en la primera hora, con pregunta de regreso.
-- Usar llamados por palabra clave (“Comenta PLANTILLA”) y enviar el recurso por DM.
+- Usar llamados por palabra clave (“Comenta PLANTILLA”) y enviar el recurso por DM. Herramientas y rutina detalladas en `GESTION_COMENTARIOS_Y_MENSAJES.md`.
 - Seguir y comentar a 10 cuentas del nicho por día (dueños de PyME, RH, consultores, emprendimiento MX).
 - 1 colaboración (*collab post*) al mes con una cuenta afín de 5–50 mil seguidores.
 
